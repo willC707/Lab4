@@ -107,7 +107,19 @@ extern std::string CallSimpleExceptionMethod(int i)
 
 	resourceThatNeedsToBeCleanedup = new MyFakeClass();
 
-	SimpleExceptionMethod(1);
+	try{
+		SimpleExceptionMethod(i);
+		retVal = "I did not get an Exception";
+	}
+	catch(MyException1){
+		retVal = "I got Exception 1";
+	}
+	catch(MyException2& e){
+		retVal = "I got Exception 2";
+	}
+	catch(MyException3& e){
+		retVal = "I got Exception 3";
+	}
 
 	delete resourceThatNeedsToBeCleanedup;
 
@@ -131,7 +143,7 @@ extern void SimpleExceptionMethod(int i)
 	else if (i == 3)
 	{
         // TODO uncomment line below, as you need to have all three exceptions working here
-		//throw MyException3();
+		throw MyException3();
 	}
 	else
 	{
@@ -154,3 +166,6 @@ char const* MyException2::what() const throw() {
 	return "MyException2";
 }
 // TODO make a MyException3::what
+char const* MyException3::what() const throw() {
+	return "MyException3";
+}
