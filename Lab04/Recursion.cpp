@@ -68,10 +68,129 @@ bool ChessBoard::Solve(ChessBoard chessBoard, int col) {
 
 bool ChessBoard::CheckSafeQueens(ChessBoard chessBoard, int row, int col) 
 {
+	bool conflict = false;
+	bool first_queen = false; // two boolean variables used for checks
+	for (int i = 0; i < 8; i++) { // check every space in the row
+		if (chessBoard.m_board[row][i] == 1 && !first_queen) { // if the spot has a queen, and no queen has been found yet, show that is our first queen
+			first_queen = true;
+		}
+		else if(chessBoard.m_board[row][i] == 1) { // if you find a second queen set the variable and leave loop
+			conflict = true;
+			break;
+		}
+	}
 
-    return false;
+	if(conflict) {
+		return false; // if there was a conflict leave the function and return false
+	}
 
-    // TODO
+	first_queen = false; // reset variable
+ 	for (int i = 0; i < 8; i++) { // same thing as earlier but with columns
+		if (chessBoard.m_board[i][col] == 1 && !first_queen) { // if the spot has a queen, and no queen has bee found yet, show that is our first queen
+			first_queen = true;
+		}
+		else if(chessBoard.m_board[i][col] == 1) { // if you find a second queen set the variable and leave loop
+			conflict = true;
+			break;
+		}
+	}
+
+	if (conflict) {
+		return false; // if there was a conflict leave the function and return false
+	}
+
+	first_queen = false; // reset variable
+	int cur_col = col;
+	int cur_row = row;
+	while (cur_col >= 0 && cur_row >= 0) {
+		// check north west
+		if (chessBoard.m_board[cur_row][cur_col] == 1 && !first_queen) {
+			first_queen = true; // show first queen has been found
+		}
+
+		else if (chessBoard.m_board[cur_row][cur_col] == 1) {
+			conflict = true;
+			break;
+		}
+
+		// decrement both variables
+		cur_col--;
+		cur_row--;
+	}
+
+	if (conflict) {
+		return false; // if there was a conflict leave the function and return false
+	}
+
+	first_queen = false; // reset variables
+	int cur_col = col;
+	int cur_row = row;
+	while (cur_col >= 0 && cur_row <= 7) {
+		// check south west
+		if (chessBoard.m_board[cur_row][cur_col] == 1 && !first_queen) {
+			first_queen = true; // show first queen has been found
+		}
+
+		else if (chessBoard.m_board[cur_row][cur_col] == 1) {
+			conflict = true;
+			break;
+		}
+		// decrement column, increment row
+		cur_col--;
+		cur_row++;
+	}
+
+	if (conflict) {
+		return false; // if there was a conflict leave the function and return false
+	}
+
+	first_queen = false; // reset variables
+	int cur_col = col;
+	int cur_row = row;
+	while (cur_col <= 7 && cur_row >= 0) {
+		// check norht east
+		if (chessBoard.m_board[cur_row][cur_col] == 1 && !first_queen) {
+			first_queen = true; // show first queen has been found
+		}
+
+		else if (chessBoard.m_board[cur_row][cur_col] == 1) {
+			conflict = true;
+			break;
+		}
+		// increment column, decrement row
+		cur_col++;
+		cur_row--;
+	}
+
+	if (conflict) {
+		return false; // if there was a conflict leave the function and return false
+	}
+
+	first_queen = false; // reset variables
+	int cur_col = col;
+	int cur_row = row;
+	while (cur_col <= 7 && cur_row <= 7) {
+		// check south east
+		if (chessBoard.m_board[cur_row][cur_col] == 1 && !first_queen) {
+			first_queen = true; // show first queen has been found
+		}
+
+		else if (chessBoard.m_board[cur_row][cur_col] == 1) {
+			conflict = true;
+			break;
+		}
+		// increment both
+		cur_col++;
+		cur_row++;
+	}
+
+	if (conflict) {
+		return false; // if there was a conflict leave the function and return false
+	}
+
+	else {
+		return true;
+	}
 }
 
 
