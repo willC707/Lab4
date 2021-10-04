@@ -169,3 +169,61 @@ char const* MyException2::what() const throw() {
 char const* MyException3::what() const throw() {
 	return "MyException3";
 }
+
+//palindromeRecursion::palindromeRecursion() {}
+
+bool palindromeRecursion::palidromeCalculator(string strToCalculate)
+{
+	
+	if(strToCalculate.empty())
+	{
+		cout << "This string is empty.\n";
+		return false;
+	}
+	while(strToCalculate.size() > 1)
+	{
+		if(strToCalculate.front() == strToCalculate.back())
+		{
+			if(strToCalculate.size() > 2)
+			{
+				strToCalculate = strToCalculate.substr(1,(strToCalculate.size() - 2));
+				palidromeCalculator(strToCalculate);
+			}
+			else{break;}
+
+			
+		}
+		else{
+			return false;
+		}
+	}
+	return true;
+}
+
+//palindromeStack::palindromeStack() {}
+
+bool palindromeStack::palidromeCalculator(string strToCalculate)
+{
+	if(strToCalculate.size() == 0)
+	{
+		cout<<"This string is empty.\n";
+		return false;
+	}
+	int i =0;
+	while(i < strToCalculate.size())
+	{
+		s.push(strToCalculate[i]);
+		i += 1;
+	}
+	//cout << strToCalculate<< endl;
+
+	for(int i =0; i<strToCalculate.size();i++){
+		if(strToCalculate[i] != s.top())
+		{
+			return false;
+		}
+		s.pop();
+	}
+	return true;
+
+}

@@ -109,16 +109,26 @@ private:
 	// TODO: add your methods here.
 };
 
-class palindromeRecursion {
+class IpalidromeCalculator {
 	public:
+		IpalidromeCalculator() {};
+		virtual bool palidromeCalculator(string strToCalculate) = 0;
+};
+
+class palindromeRecursion : public IpalidromeCalculator {
+	public:
+		palindromeRecursion() {};
+		bool palidromeCalculator(string strToCalculate);
 
 	private:
 
 };
-class palindromeStack {
+class palindromeStack : public IpalidromeCalculator {
 	public:
+		palindromeStack() {};
+		bool palidromeCalculator(string strToCalculate);
 
 	private:
-
+		stack <char> s;
 
 };

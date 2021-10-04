@@ -10,6 +10,10 @@ add_library (applibrary Recursion.cpp)
 add_executable(runTests tests.cpp)
 target_link_libraries(runTests ${GTEST_LIBRARIES} pthread applibrary) 
 
+# Link runUnitTests with what we want to test and the GTest and pthread library
+add_executable(runUnitTests UnitTests.cpp)
+target_link_libraries(runUnitTests ${GTEST_LIBRARIES} pthread applibrary)
+
 add_executable(runMain main.cpp)
 target_link_libraries(runMain applibrary)
 
